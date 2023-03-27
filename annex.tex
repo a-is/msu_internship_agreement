@@ -1,0 +1,224 @@
+% !TEX encoding = UTF-8 Unicode
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                          ИНФОРМАЦИЯ ДЛЯ ОТЧЕТА                           %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\date{%
+    <<\ul{1}>> \ul{февраля} \ul{2023} г.
+}
+
+\def\studentName{%
+    % В родиетльном падеже.
+    ФИО студента%
+}
+\def\MSUAdviser{%
+    Арушанян Игорь Олегович%
+}
+\def\organizationAdviser{%
+    ФИО руководителя от предприятия%
+}
+\def\theme{%
+    тема%
+}
+\def\organizationSigns{
+    % \addSign{должность}{ФИО}
+    % \addSign{руководитель}{ФИО руководителя}
+    \addSign{директор}{Фамилия~И.\,О.}
+}
+\def\MSUSigns{
+    \addSign{руководитель}{Арушанян~И.\,О.}
+}
+
+\long\def\task{
+    Индивидуальное задание
+}
+\def\plan{
+    % \addStage{дата начала}{дата окончания}{форма контроля}{этап}
+    \addStage
+        {2 февраля 2023}
+        {28 февраля 2023}
+        {Рабочие материалы для руководителя практики.}
+        {длинное описание очередного этапа \par \lipsum[2]}
+}
+\long\def\report{
+    Отзыв
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                                ПРЕАМБУЛА                                 %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[
+    a4paper,
+    oneside,
+    % draft,
+]{amsart}
+
+\usepackage{lipsum}
+
+% Шрифт
+\usepackage{tempora}
+
+\usepackage[fontsize=12pt]{scrextend}
+% \linespread{1.2}
+
+\usepackage{setspace}
+\onehalfspace
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{cmap}
+
+\usepackage[
+    left=30mm,
+    right=10mm,
+    top=20mm,
+    bottom=20mm,
+]{geometry}
+
+\usepackage{soulutf8}
+
+\usepackage{enumitem}
+\setlist{nolistsep, noitemsep, leftmargin=30pt, topsep=0pt}
+
+\usepackage{tabularx}
+\usepackage{ltablex}
+\usepackage{booktabs}
+
+\usepackage{makecell}
+
+\usepackage{calc}
+
+% Математический шрифт
+\usepackage[bigdelims, vvarbb]{newtxmath}
+
+% disable indent
+\setlength{\parindent}{0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                         ВСПОМОГАТЕЛЬНЫЕ МАКРОСЫ                          %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\trim#1{%
+    \ignorespaces#1\unskip%
+}
+
+\def\SECTION#1{%
+    % \section*{\normalfont \textbf{#1}}%
+    \specialsection*{\textbf{#1}}%
+}
+
+\def\tline#1#2{%
+    $\underset{\text{#1}}{\text{\underline{\hskip #2}}}$%
+}
+
+\def\sign#1{%
+    \tline{(подпись)}{100pt}
+    {\hyphenchar\font=-1 /~\trim{#1}~/}%
+}
+
+\def\dateRangeCell#1#2{%
+    \makecell[lt]{#1\,-- \\ #2}%
+}
+
+\newlength\fieldwidth
+
+\def\fullLineField#1#2{%
+    \def\filedname{#1\quad}%
+    \setlength{\fieldwidth}{\textwidth - \widthof{\filedname}}%
+    \filedname \underline{\makebox[\fieldwidth][c]{#2}}%
+}
+
+\def\multiLineField#1#2{%
+    \def\filedname{#1\quad}%
+    \setlength{\fieldwidth}{\textwidth - \widthof{\filedname}}%
+    \filedname
+    \begin{minipage}[t]{\fieldwidth}
+        \ul#2%
+    \end{minipage}
+}
+
+\newlength{\baselineskipCOPY}
+\setlength{\baselineskipCOPY}{\baselineskip}
+
+\def\strut#1{%
+    \addlinespace[#1\baselineskipCOPY]%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                             ТЕКСТ ДОКУМЕНТА                              %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\thispagestyle{empty}
+\pagestyle{empty}
+
+\def\addSign#1#2{
+    \\[20pt]
+    #1 \\[5pt]
+    \sign{#2}
+}
+
+\long\def\appendix#1#2{
+    \newpage
+
+    \begin{flushright}
+        Приложение \\
+        к договору на прохождение практики студентами \\
+        Московского государственного университета имени М.\,В.~Ломоносова \\
+        в организации (учреждении, предприятии)
+    \end{flushright}
+
+    \vskip \baselineskip
+
+    \SECTION{#1}
+
+    \multiLineField{Студента 6 курса}{\studentName}
+    \multiLineField{Руководитель от МГУ имени М.\,В.~Ломоносова}{\MSUAdviser}
+    \multiLineField{Руководитель от предприятия}{\organizationAdviser}
+    \multiLineField{Тема}{\theme}
+
+    #2
+
+    % \vskip\fill
+    \vskip \baselineskip
+
+    \noindent
+    \begin{minipage}[t]{.48\textwidth}
+        Организация: %\\
+        % \organizationName
+        \organizationSigns
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{.48\textwidth}
+        МГУ имени М.\,В.~Ломоносова:
+        \MSUSigns
+    \end{minipage}
+}
+
+\appendix{Индивидуальное задание студента\,--\,практиканта}{\task}
+
+\appendix{Календарный план\,--\,график студента\,--\,практиканта}{
+    \newcounter{stageno}
+    \long\def\addStage#1#2#3#4{
+        \stepcounter{stageno}
+        \thestageno & #4 & \dateRangeCell{#1}{#2} & #3 \\
+        \hline
+    }
+    \begin{tabularx}{\textwidth}{|p{1.5em}|X|p{8em}|p{7em}|}
+    \hline
+        \textbf{№ п/п} &
+        \textbf{Разделы (этапы) практики} &
+        \textbf{Даты работы, на практике включая самостоятельную работу
+            студентов и трудоемкость (в днях по этапам)} &
+        \textbf{Формы текущего контроля} \\
+    \hline
+    \plan
+    \end{tabularx}
+}
+
+\appendix{Отчёт о практике студента\,--\,практиканта}{\report}
+
+\end{document}
