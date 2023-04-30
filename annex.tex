@@ -135,7 +135,6 @@
 }
 
 \def\SECTION#1{%
-    % \section*{\normalfont \textbf{#1}}%
     \specialsection*{\textbf{#1}}%
 }
 
@@ -152,29 +151,9 @@
     \makecell[lt]{#1\,-- \\ #2}%
 }
 
-\newlength\fieldwidth
-
-\def\fullLineField#1#2{%
-    \def\filedname{#1\quad}%
-    \setlength{\fieldwidth}{\textwidth - \widthof{\filedname}}%
-    \filedname \underline{\makebox[\fieldwidth][c]{#2}}%
-}
-
 \def\multiLineField#1#2{%
-    \def\filedname{#1\quad}%
-    \setlength{\fieldwidth}{\textwidth - \widthof{\filedname}}%
-    \filedname
-    % \begin{minipage}[t]{\fieldwidth}
-        \ul#2%
-    % \end{minipage}
+    #1\quad \ul#2%
 }
-
-% \newlength{\baselineskipCOPY}
-% \setlength{\baselineskipCOPY}{\baselineskip}
-
-% \def\strut#1{%
-%     \addlinespace[#1\baselineskipCOPY]%
-% }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%                             ТЕКСТ ДОКУМЕНТА                              %%%
